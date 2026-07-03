@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import DocumentUploader from './DocumentUploader'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -96,6 +97,7 @@ function newEvent() {
 }
 
 export default function App() {
+  const [apiKey,         setApiKey]         = useState(() => localStorage.getItem('layCalcApiKey') || '')
   const [vessel,         setVessel]         = useState('')
   const [voyageRef,      setVoyageRef]      = useState('')
   const [cargoQty,       setCargoQty]       = useState('')
@@ -139,6 +141,22 @@ export default function App() {
 
   // ─── Event handlers ───────────────────────────────────────────────────────
 
+  const saveApiKey = val => { setApiKey(val); localStorage.setItem('layCalcApiKey', val) }
+
+  const handleApply = data => {
+    if (data.vessel       !== undefined) setVessel(data.vessel || '')
+    if (data.voyageRef    !== undefined) setVoyageRef(data.voyageRef || '')
+    if (data.cargoQty     !== undefined) setCargoQty(data.cargoQty != null ? String(data.cargoQty) : '')
+    if (data.laytimeAllowed !== undefined) setLaytimeAllowed(data.laytimeAllowed != null ? String(data.laytimeAllowed) : '')
+    if (data.demRate      !== undefined) setDemRate(data.demRate != null ? String(data.demRate) : '')
+    if (data.despRate     !== undefined) setDespRate(data.despRate != null ? String(data.despRate) : '')
+    if (data.norTime      !== undefined) setNorTime(data.norTime || '')
+    if (data.commenceTime !== undefined) setCommenceTime(data.commenceTime || '')
+    if (data.endTime      !== undefined) setEndTime(data.endTime || '')
+    if (data.terms        !== undefined) setTerms(data.terms || 'SHINC')
+    if (data.events?.length > 0) setEvents(data.events)
+  }
+
   const addEvent    = () => setEvents(es => [...es, newEvent()])
   const removeEvent = id => setEvents(es => es.filter(e => e.id !== id))
   const updateEvent = (id, field, val) =>
@@ -167,6 +185,27 @@ export default function App() {
 
       {/* ── BODY ─────────────────────────────────────────────────────────────── */}
       <div className="app-body">
+
+        {/* Card 0 — AI document extraction */}
+        <div className="card">
+          <div className="card-head">
+            <div className="card-title">AI Document Extraction</div>
+          </div>
+          <div className="card-body">
+            <div className="api-key-row">
+              <label>Anthropic API Key</label>
+              <input
+                type="password"
+                value={apiKey}
+                onChange={e => saveApiKey(e.target.value)}
+                placeholder="sk-ant-api03-…"
+                autoComplete="off"
+              />
+              <span className="api-key-hint">Stored locally · never sent anywhere except api.anthropic.com</span>
+            </div>
+            <DocumentUploader apiKey={apiKey} onApply={handleApply} />
+          </div>
+        </div>
 
         {/* Card 1 — Voyage details */}
         <div className="card">
