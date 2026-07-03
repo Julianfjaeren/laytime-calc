@@ -341,18 +341,21 @@ export default function App() {
             {/* Summary cards */}
             <div className="summary-grid">
               <div className="stat-card">
+                <div className="stat-icon">⏱</div>
                 <div className="stat-label">Laytime allowed</div>
                 <div className="stat-value">{fmtHrs(allowed)}</div>
                 <div className="stat-unit">hours</div>
               </div>
 
               <div className="stat-card">
+                <div className="stat-icon">⚖</div>
                 <div className="stat-label">Laytime used</div>
                 <div className="stat-value">{fmtHrs(hoursUsed)}</div>
                 <div className="stat-unit">hours</div>
               </div>
 
               <div className={`stat-card${balance < 0 ? ' debit' : balance > 0 ? ' credit' : ''}`}>
+                <div className="stat-icon">⚓</div>
                 <div className="stat-label">Balance</div>
                 <div className="stat-value">
                   {balance < 0
@@ -371,6 +374,7 @@ export default function App() {
               </div>
 
               <div className={`stat-card${balance < 0 ? ' debit' : balance > 0 ? ' credit' : ''}`}>
+                <div className="stat-icon">💰</div>
                 <div className="stat-label">
                   {balance < 0 ? 'Demurrage owed' : 'Despatch earned'}
                 </div>
