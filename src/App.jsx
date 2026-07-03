@@ -97,7 +97,6 @@ function newEvent() {
 }
 
 export default function App() {
-  const [apiKey,         setApiKey]         = useState(() => localStorage.getItem('layCalcApiKey') || '')
   const [vessel,         setVessel]         = useState('')
   const [voyageRef,      setVoyageRef]      = useState('')
   const [cargoQty,       setCargoQty]       = useState('')
@@ -141,7 +140,6 @@ export default function App() {
 
   // ─── Event handlers ───────────────────────────────────────────────────────
 
-  const saveApiKey = val => { setApiKey(val); localStorage.setItem('layCalcApiKey', val) }
 
   const handleApply = data => {
     if (data.vessel       !== undefined) setVessel(data.vessel || '')
@@ -192,18 +190,7 @@ export default function App() {
             <div className="card-title">AI Document Extraction</div>
           </div>
           <div className="card-body">
-            <div className="api-key-row">
-              <label>Anthropic API Key</label>
-              <input
-                type="password"
-                value={apiKey}
-                onChange={e => saveApiKey(e.target.value)}
-                placeholder="sk-ant-api03-…"
-                autoComplete="off"
-              />
-              <span className="api-key-hint">Stored locally · never sent anywhere except api.anthropic.com</span>
-            </div>
-            <DocumentUploader apiKey={apiKey} onApply={handleApply} />
+            <DocumentUploader onApply={handleApply} />
           </div>
         </div>
 

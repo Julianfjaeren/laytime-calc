@@ -31,7 +31,8 @@ Rules:
 - isException true = time is excepted from laytime count
 - Return ONLY valid JSON, no markdown fences, no explanation`
 
-async function extractFromFile(file, apiKey) {
+async function extractFromFile(file) {
+  const apiKey = import.meta.env.VITE_ANTHROPIC_KEY
   const toBase64 = buf =>
     btoa(new Uint8Array(buf).reduce((s, b) => s + String.fromCharCode(b), ''))
 
@@ -74,7 +75,7 @@ async function extractFromFile(file, apiKey) {
   return JSON.parse(match[0])
 }
 
-export default function DocumentUploader({ apiKey, onApply }) {
+export default function DocumentUploader({ onApply }) {
   const [phase, setPhase] = useState('idle') // idle | loading | review | error
   const [edits, setEdits] = useState({})
   const [errorMsg, setErrorMsg] = useState('')
@@ -84,16 +85,11 @@ export default function DocumentUploader({ apiKey, onApply }) {
 
   const handleFile = async file => {
     if (!file) return
-    if (!apiKey) {
-      setErrorMsg('Enter your Anthropic API key in the field above first.')
-      setPhase('error')
-      return
-    }
     setFileName(file.name)
     setPhase('loading')
     setErrorMsg('')
     try {
-      const data = await extractFromFile(file, apiKey)
+      const data = await extractFromFile(file)
       setEdits(data)
       setPhase('review')
     } catch (e) {
