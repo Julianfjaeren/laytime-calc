@@ -29,8 +29,8 @@ h1, h2, h3 {
   --teal-dim: #3a7090;
   --text: #c8dde8;
   --text-bright: #e8f4f8;
-  --text-muted: #5a8a9f;
-  --text-dim: #3a6070;
+  --text-muted: #a0b4cc;
+  --text-dim: #607080;
   --red: #d85a30;
   --red-text: #f09575;
   --green: #4ecb8a;
@@ -75,8 +75,8 @@ body {
 
 /* ── Fields ──────────────────────────────────────────────────────────────────── */
 .field { display: flex; flex-direction: column; gap: 5px; }
-.field label { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.03em; }
-.field .helper { font-size: 0.7rem; color: #4a7a8a; margin-top: 2px; }
+.field label { font-size: 0.75rem; color: #a0b4cc; letter-spacing: 0.03em; }
+.field .helper { font-size: 0.7rem; color: #607080; margin-top: 2px; }
 
 /* ── Inputs ──────────────────────────────────────────────────────────────────── */
 input[type="text"],
@@ -129,7 +129,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: invert
 .stat-card.debit  { border: 2px solid var(--red); }
 .stat-card.credit { border: 2px solid var(--teal); }
 .stat-icon { font-size: 18px; line-height: 1; margin-bottom: 8px; }
-.stat-label { font-size: 10px; color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; }
+.stat-label { font-size: 10px; color: #8090a8; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; }
 .stat-value { font-size: 28px; font-weight: 500; font-family: var(--mono); color: var(--text-bright); }
 .stat-card.debit  .stat-value { color: var(--red-text); }
 .stat-card.credit .stat-value { color: var(--teal); }
@@ -140,7 +140,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: invert
 .stmt-head { background: #0a1e2e; padding: 12px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .stmt-meta { font-size: 11px; color: var(--text-dim); font-family: var(--mono); }
 .stmt-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.stmt-table th { font-size: 10px; color: var(--text-dim); letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 16px; text-align: left; border-bottom: 1px solid var(--border); font-weight: 400; }
+.stmt-table th { font-size: 10px; color: #8090a8; letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 16px; text-align: left; border-bottom: 1px solid var(--border); font-weight: 400; }
 .stmt-table td { padding: 7px 16px; border-bottom: 1px solid #0f2535; color: #7aafcc; font-family: var(--mono); }
 .stmt-table td:nth-child(1) { color: var(--text); font-family: inherit; min-width: 200px; }
 .stmt-table tbody tr:nth-child(even) td { background: #0f2535; }
