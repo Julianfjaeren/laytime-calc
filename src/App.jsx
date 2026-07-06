@@ -181,6 +181,26 @@ export default function App() {
         </button>
       </nav>
 
+      {/* ── HERO ─────────────────────────────────────────────────────────────── */}
+      <div className="hero">
+        <div className="hero-eyebrow">
+          ⚓ Maritime chartering tool
+        </div>
+        <h1 className="hero-title">
+          Laytime &amp; demurrage,<br />
+          <strong>calculated in seconds</strong>
+        </h1>
+        <p className="hero-desc">
+          Upload a charterparty or fixture recap — LayCalc reads the document and fills in the form automatically. Get a printable statement of facts in one click.
+        </p>
+        <div className="hero-pills">
+          <span className="hero-pill">📄 PDF, image, CSV upload</span>
+          <span className="hero-pill">✦ AI document extraction</span>
+          <span className="hero-pill">📅 SHINC · SHEX · WIBON · WIPON</span>
+          <span className="hero-pill">⬇ Export statement of facts</span>
+        </div>
+      </div>
+
       {/* ── BODY ─────────────────────────────────────────────────────────────── */}
       <div className="app-body">
 
@@ -341,22 +361,19 @@ export default function App() {
             {/* Summary cards */}
             <div className="summary-grid">
               <div className="stat-card">
-                <div className="stat-icon">⏱</div>
-                <div className="stat-label">Laytime allowed</div>
+                <div className="stat-label">⏱ Laytime allowed</div>
                 <div className="stat-value">{fmtHrs(allowed)}</div>
                 <div className="stat-unit">hours</div>
               </div>
 
               <div className="stat-card">
-                <div className="stat-icon">⚖</div>
-                <div className="stat-label">Laytime used</div>
+                <div className="stat-label">⧗ Laytime used</div>
                 <div className="stat-value">{fmtHrs(hoursUsed)}</div>
                 <div className="stat-unit">hours</div>
               </div>
 
               <div className={`stat-card${balance < 0 ? ' debit' : balance > 0 ? ' credit' : ''}`}>
-                <div className="stat-icon">⚓</div>
-                <div className="stat-label">Balance</div>
+                <div className="stat-label">⚖ Balance</div>
                 <div className="stat-value">
                   {balance < 0
                     ? `−${fmtHrs(Math.abs(balance))}`
@@ -374,9 +391,8 @@ export default function App() {
               </div>
 
               <div className={`stat-card${balance < 0 ? ' debit' : balance > 0 ? ' credit' : ''}`}>
-                <div className="stat-icon">💰</div>
                 <div className="stat-label">
-                  {balance < 0 ? 'Demurrage owed' : 'Despatch earned'}
+                  $ {balance < 0 ? 'Demurrage owed' : 'Despatch earned'}
                 </div>
                 <div className="stat-value">
                   {balance < 0 ? fmtUSD(demurrageOwed) : fmtUSD(despatchEarned)}
@@ -406,10 +422,10 @@ export default function App() {
                 <tbody>
                   {periods.map((p, i) => (
                     <tr key={i}>
-                      <td>{p.label}</td>
+                      <td className="period-cell">{p.label}</td>
                       <td>{fmt(p.from)}</td>
                       <td>{fmt(p.to)}</td>
-                      <td>{p.excepted ? '—' : fmtHrs(p.hoursInPeriod)}</td>
+                      <td className={p.excepted ? '' : 'counted'}>{p.excepted ? '—' : fmtHrs(p.hoursInPeriod)}</td>
                       <td>
                         {p.excepted
                           ? <span className="badge badge-exc">Excepted</span>
